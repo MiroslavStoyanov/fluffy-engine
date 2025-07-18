@@ -5,6 +5,6 @@ The initial setup lives inside the `analytics-service` directory. To get started
 
 ```bash
 cd analytics-service
-npm install
-npm run start:dev
+yarn install
+yarn start:dev
 ```
