@@ -23,3 +23,6 @@ package-lock.json
 # temp directory
 .temp
 .tmp
+.pnp.cjs
+.pnp.loader.mjs
+.yarn/

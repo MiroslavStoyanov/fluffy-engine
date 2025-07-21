@@ -8,3 +8,13 @@ cd analytics-service
 yarn install
 yarn start:dev
 ```
+
+## Kafka
+
+The service now queues incoming events to a Kafka topic named `analytics-events`. The broker address defaults to `localhost:9092` and can be overridden via the `KAFKA_BROKER` environment variable.
+
+Send events using the `/events` endpoint:
+
+```bash
+curl -X POST http://localhost:3000/events -H 'Content-Type: application/json' -d '{"type":"signup","user":"abc"}'
+```
