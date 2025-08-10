@@ -1,11 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class EventsService {
-  constructor(@Inject('ANALYTICS_EVENTS') private readonly kafkaClient: ClientKafka) {}
+  constructor(
+    @Inject('ANALYTICS_EVENTS') private readonly kafkaClient: ClientKafka,
+  ) {}
 
-  async sendEvent(event: any) {
-    await this.kafkaClient.emit('analytics-events', event);
+  async sendEvent(event: unknown) {
+    await lastValueFrom(this.kafkaClient.emit('analytics-events', event));
   }
 }

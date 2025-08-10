@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventsController } from './events.controller';
 import { EventsService } from './events.service';
 import { EventsConsumer } from './events.consumer';
+import { EventEntity } from './event.entity';
+import { EventStoreService } from './event-store.service';
 
 @Module({
   imports: [
@@ -20,8 +23,10 @@ import { EventsConsumer } from './events.consumer';
         },
       },
     ]),
+    TypeOrmModule.forFeature([EventEntity]),
   ],
   controllers: [EventsController, EventsConsumer],
-  providers: [EventsService],
+  providers: [EventsService, EventStoreService],
+  exports: [EventStoreService],
 })
 export class EventsModule {}

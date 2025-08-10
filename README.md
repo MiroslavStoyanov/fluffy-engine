@@ -18,3 +18,12 @@ Send events using the `/events` endpoint:
 ```bash
 curl -X POST http://localhost:3000/events -H 'Content-Type: application/json' -d '{"type":"signup","user":"abc"}'
 ```
+
+## Persistence and Metrics
+
+Consumed events are stored in a database. Set `DATABASE_URL` to a PostgreSQL
+connection string; otherwise an in-memory SQLite database is used. The basic
+schema records the event `timestamp`, `type`, and raw `payload`.
+
+Recent activity can be retrieved from the `/metrics` endpoint, which returns
+event counts grouped by minute for the last five minutes.
